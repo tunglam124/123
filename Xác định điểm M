@@ -1,0 +1,29 @@
+import java.util.Scanner;
+public class CirclePointPosition {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Xác định toạ độ điểm M");
+        // Nhập tọa độ tâm đường tròn và bán kính
+        System.out.print("Vui lòng nhập tọa độ x của tâm đường tròn: ");
+        double xCenter = scanner.nextDouble();
+        System.out.print("Vui lòng nhập tọa độ y của tâm đường tròn: ");
+        double yCenter = scanner.nextDouble();
+        System.out.print("Vui lòng nhập bán kính đường tròn: ");
+        double radius = scanner.nextDouble();
+        // Nhập tọa độ của điểm M
+        System.out.print("Vui lòng nhập tọa độ x của điểm M: ");
+        double xM = scanner.nextDouble();
+        System.out.print("Vui lòng nhập tọa độ y của điểm M: ");
+        double yM = scanner.nextDouble();
+        // Tính khoảng cách từ điểm M đến tâm đường tròn
+        double distance = Math.sqrt(Math.pow(xM - xCenter, 2) + Math.pow(yM - yCenter, 2));
+        // So sánh khoảng cách với bán kính để xác định vị trí của điểm M
+        if (distance < radius) {
+            System.out.println("Điểm M nằm bên trong đường tròn.");
+        } else if (distance == radius) {
+            System.out.println("Điểm M nằm trên đường tròn.");
+        } else {
+            System.out.println("Điểm M nằm ngoài đường tròn.");
+        }
+    }
+}
