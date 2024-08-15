@@ -1,0 +1,15 @@
+import java.util.Scanner;
+public class tinhtrungbinh {
+	static int count = 5;
+	public static void main (String [] args) {
+		Scanner x = new Scanner(System.in);
+		int sum = 0;
+		for(int i=0; i< count ; i++) {
+			System.out.println("Nhap so nguyen thu "+ i + ": ");
+			int num = x.nextInt();
+			sum += num;
+		}
+		double tb = (double) sum/count;
+		System.out.println("Trung binh = " + tb);
+	}
+}
