@@ -1,0 +1,88 @@
+package test1;
+import java.util.Scanner;
+public class TinhDiem {
+    public static double nhapDiemChuan(Scanner scanner) {
+        System.out.print("Nhập điểm chuẩn: ");
+        return scanner.nextDouble();
+    }
+    public static double nhapDiemThi(Scanner scanner, String mon) {
+        System.out.print("Nhập điểm " + mon + ": ");
+        return scanner.nextDouble();
+    }
+    public static char nhapKhuVuc(Scanner scanner) {
+        System.out.print("Nhập khu vực (A, B, C hoặc X nếu không có): ");
+        return scanner.next().charAt(0);
+    }
+    public static int nhapDoiTuong(Scanner scanner) {
+        System.out.print("Nhập đối tượng (1, 2, 3 hoặc 0 nếu không có): ");
+        return scanner.nextInt();
+    }
+    public static double tinhDiemUuTien(char khuVuc, int doiTuong) {
+        double diemUuTien = 0.0;
+        switch (khuVuc) {
+            case 'A':
+                diemUuTien += 2.0;
+                break;
+            case 'B':
+                diemUuTien += 1.0;
+                break;
+            case 'C':
+                diemUuTien += 0.5;
+                break;
+            default:
+                break;
+        }
+        switch (doiTuong) {
+            case 1:
+                diemUuTien += 2.5;
+                break;
+            case 2:
+                diemUuTien += 1.5;
+                break;
+            case 3:
+                diemUuTien += 1.0;
+                break;
+            default:
+                break;
+        }
+        return diemUuTien;
+    }
+    public static double tinhTongDiem(double diemMon1, double diemMon2, double diemMon3, double diemUuTien) {
+        return diemMon1 + diemMon2 + diemMon3 + diemUuTien;
+    }
+    public static void kiemTraKetQua(double tongDiem, double diemChuan, double diemMon1, double diemMon2, double diemMon3) {
+        if (diemMon1 > 0 && diemMon2 > 0 && diemMon3 > 0 && tongDiem >= diemChuan) {
+            System.out.println("Thí sinh ĐẬU với tổng điểm: " + tongDiem);
+        } else {
+            System.out.println("Thí sinh RỚT với tổng điểm: " + tongDiem);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập điểm chuẩn
+        double diemChuan = nhapDiemChuan(scanner);
+
+        // Nhập điểm 3 môn thi
+        double diemMon1 = nhapDiemThi(scanner, "môn thứ nhất");
+        double diemMon2 = nhapDiemThi(scanner, "môn thứ hai");
+        double diemMon3 = nhapDiemThi(scanner, "môn thứ ba");
+
+        // Nhập khu vực ưu tiên
+        char khuVuc = nhapKhuVuc(scanner);
+
+        // Nhập đối tượng ưu tiên
+        int doiTuong = nhapDoiTuong(scanner);
+
+        // Tính điểm ưu tiên
+        double diemUuTien = tinhDiemUuTien(khuVuc, doiTuong);
+
+        // Tính điểm tổng kết
+        double tongDiem = tinhTongDiem(diemMon1, diemMon2, diemMon3, diemUuTien);
+
+        // Kiểm tra điều kiện đậu hay rớt
+        kiemTraKetQua(tongDiem, diemChuan, diemMon1, diemMon2, diemMon3);
+
+        scanner.close();
+    }
+}
