@@ -1,0 +1,57 @@
+package test1;
+
+import java.util.Scanner;
+import java.util.HashSet;
+
+public class PowerOfThree {
+
+    // Hàm kiểm tra xem số có phải là lũy thừa của 3 hay không
+    public static boolean isPowerOfThree(int num) {
+        if (num <= 0) return false;
+        while (num % 3 == 0) {
+            num /= 3;
+        }
+        return num == 1;
+    }
+
+    // Hàm nhập mảng từ người dùng
+    public static int[] inputArray() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập số lượng phần tử của mảng:");
+        int n = scanner.nextInt();
+        int[] nums = new int[n];
+        
+        System.out.println("Nhập các phần tử của mảng:");
+        for (int i = 0; i < n; i++) {
+            nums[i] = scanner.nextInt();
+        }
+        return nums;
+    }
+
+    // Hàm xuất các giá trị là lũy thừa của 3
+    public static void outputPowerOfThree(int[] nums) {
+        HashSet<Integer> resultSet = new HashSet<>();
+        
+        for (int num : nums) {
+            if (isPowerOfThree(num)) {
+                resultSet.add(num);
+            }
+        }
+        
+        if (resultSet.isEmpty()) {
+            System.out.println("Không có giá trị nào có dạng 3^k trong mảng.");
+        } else {
+            System.out.print("Các giá trị có dạng 3^k: ");
+            for (int value : resultSet) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Hàm chính
+    public static void main(String[] args) {
+        int[] nums = inputArray();        // Nhập mảng từ người dùng
+        outputPowerOfThree(nums);         // Liệt kê các giá trị dạng 3^k
+    }
+}
