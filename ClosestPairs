@@ -1,0 +1,54 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class ClosestPairs {
+
+    // Hàm liệt kê các cặp số có giá trị gần nhau nhất trong mảng
+    public static void findClosestPairs(int[] nums) {
+        if (nums.length < 2) {
+            System.out.println("Mảng cần ít nhất 2 phần tử để có cặp số.");
+            return;
+        }
+
+        // Sắp xếp mảng
+        Arrays.sort(nums);
+
+        // Tìm khoảng cách nhỏ nhất giữa các cặp số liền kề
+        int minDifference = Integer.MAX_VALUE;
+        for (int i = 1; i < nums.length; i++) {
+            int difference = nums[i] - nums[i - 1];
+            if (difference < minDifference) {
+                minDifference = difference;
+            }
+        }
+
+        // Liệt kê các cặp có khoảng cách bằng giá trị nhỏ nhất
+        System.out.println("Các cặp số có giá trị gần nhau nhất là:");
+        for (int i = 1; i < nums.length; i++) {
+            int difference = nums[i] - nums[i - 1];
+            if (difference == minDifference) {
+                System.out.println("(" + nums[i - 1] + ", " + nums[i] + ")");
+            }
+        }
+    }
+
+    // Hàm nhập mảng từ người dùng
+    public static int[] inputArray() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập số lượng phần tử của mảng:");
+        int n = scanner.nextInt();
+        int[] nums = new int[n];
+        
+        System.out.println("Nhập các phần tử của mảng:");
+        for (int i = 0; i < n; i++) {
+            nums[i] = scanner.nextInt();
+        }
+        return nums;
+    }
+
+    // Hàm chính
+    public static void main(String[] args) {
+        int[] nums = inputArray();    // Nhập mảng từ người dùng
+        findClosestPairs(nums);       // Tìm và liệt kê các cặp số gần nhau nhất
+    }
+}
