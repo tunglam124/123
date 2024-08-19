@@ -1,0 +1,22 @@
+package test1;
+import java.util.Scanner;
+
+public class TinhSoNam {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số tiền anh X gửi (P): ");
+        double P = scanner.nextDouble();
+        System.out.print("Nhập số tiền anh X muốn có trong tương lai (A): ");
+        double A = scanner.nextDouble();
+        System.out.print("Nhập lãi suất hàng năm (r) (theo phần trăm): ");
+        double r = scanner.nextDouble() / 100;
+        int n = 0;
+        while (P < A) {
+            P += P * r; 
+            n++; 
+        }
+        System.out.println("Số năm ít nhất mà anh X phải chờ đợi: " + n + " năm");
+        scanner.close();
+    }
+}
