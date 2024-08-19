@@ -1,0 +1,45 @@
+package test1;
+import java.util.Scanner;
+
+public class TamGiacCan {
+    public static void inTamGiacDac(int n) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 1; j <= 2 * i - 1; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+    public static void inTamGiacRong(int n) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 1; j <= 2 * i - 1; j++) {
+                if (i == 1 || i == n) {
+                    System.out.print("*");
+                } else {
+                    if (j == 1 || j == 2 * i - 1) {
+                        System.out.print("*");
+                    } else {
+                        System.out.print(" ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập chiều cao của tam giác n: ");
+        int n = scanner.nextInt();
+        System.out.println("Tam giác đặc:");
+        inTamGiacDac(n);
+        System.out.println("Tam giác rỗng:");
+        inTamGiacRong(n);
+        scanner.close();
+    }
+}
