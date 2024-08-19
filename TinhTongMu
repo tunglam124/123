@@ -1,0 +1,20 @@
+package test1;
+import java.util.*;
+public class TinhTongMu {
+	public static double tinhTong (double x, int n ) {
+		double sum = 0;
+		for (int i = 0; i <n ; i ++) {
+			sum += Math.pow(x, i);
+		}
+		return sum;
+	}
+	public static void main (String[] args) {
+		Scanner y = new Scanner(System.in);
+		System.out.println("Nhập n: ");
+		int n = y.nextInt();
+		System.out.println("Nhập x: ");
+		double  x = y.nextDouble();
+		double sum = tinhTong(x,n);
+		System.out.println(sum);
+	}
+}
