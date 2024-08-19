@@ -1,0 +1,18 @@
+package test1;
+import java.util.*;
+public class TinhTongGiaThua {
+	public static double tinhTong (double x) {
+		double sum = 1;
+		for (int i = 1; i <=x ; i ++) {
+			sum =sum*i;
+		}
+		return sum;
+	}
+	public static void main (String[] args) {
+		Scanner y = new Scanner(System.in);
+		System.out.println("Nhập x: ");
+		double  x = y.nextDouble();
+		double sum = tinhTong(x);
+		System.out.println(sum);
+	}
+}
