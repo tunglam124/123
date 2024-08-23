@@ -1,0 +1,68 @@
+package test1;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    // Hàm nhập số lượng phần tử n
+    public static int inputArraySize(Scanner scanner) {
+        System.out.print("Nhập số lượng phần tử n: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm tạo mảng ngẫu nhiên với n phần tử trong khoảng [-1000, 1000]
+    public static int[] generateRandomArray(int n) {
+        int[] array = new int[n];
+        Random rand = new Random();
+        for (int i = 0; i < n; i++) {
+            array[i] = rand.nextInt(2001) - 1000; // Số ngẫu nhiên trong khoảng [-1000, 1000]
+        }
+        return array;
+    }
+
+    // Hàm xuất mảng
+    public static void printArray(int[] array) {
+        System.out.print("Mảng ngẫu nhiên: ");
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
+    // Hàm kiểm tra giá trị lớn hơn trị tuyệt đối của giá trị đứng liền sau nó trong mảng
+    public static boolean isGreaterThanNextAbs(int current, int next) {
+        return current > Math.abs(next);
+    }
+
+    // Hàm tính tổng các giá trị lớn hơn trị tuyệt đối của giá trị đứng liền sau nó trong mảng
+    public static int sumGreaterThanNextAbs(int[] array) {
+        int sum = 0;
+        for (int i = 0; i < array.length - 1; i++) {
+            if (isGreaterThanNextAbs(array[i], array[i + 1])) {
+                sum += array[i];
+            }
+        }
+        return sum;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập số lượng phần tử n
+        int n = inputArraySize(scanner);
+
+        // Tạo mảng ngẫu nhiên
+        int[] array = generateRandomArray(n);
+
+        // Xuất mảng
+        printArray(array);
+
+        // Tính tổng các giá trị lớn hơn trị tuyệt đối của giá trị đứng liền sau nó
+        int sum = sumGreaterThanNextAbs(array);
+
+        // In kết quả tổng
+        System.out.println("Tổng các giá trị lớn hơn trị tuyệt đối của giá trị đứng liền sau nó: " + sum);
+    }
+}
