@@ -1,0 +1,65 @@
+package test1;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static int getEvenNumber(Scanner scanner) {
+        int n;
+        do {
+            System.out.print("Nhập n (số chẵn): ");
+            n = scanner.nextInt();
+            if (n % 2 != 0) {
+                System.out.println("n phải là số chẵn!");
+            }
+        } while (n % 2 != 0);
+        return n;
+    }
+    public static int[] generateRandomArray(int n) {
+        int[] array = new int[n];
+        Random rand = new Random();
+        for (int i = 0; i < n; i++) {
+            array[i] = rand.nextInt(201) - 100; 
+        }
+        return array;
+    }
+    public static void printArray(int[] array) {
+        System.out.print("Mảng ngẫu nhiên: ");
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+    public static void listEvenNumbersInRange(int[] array, int x, int y) {
+        System.out.print("Các số chẵn trong đoạn [" + x + ", " + y + "]: ");
+        boolean found = false;
+        for (int num : array) {
+            if (num % 2 == 0 && num >= x && num <= y) {
+                System.out.print(num + " ");
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Không có số chẵn nào trong đoạn này.");
+        } else {
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Nhập n
+        int n = getEvenNumber(scanner);
+        // Tạo mảng ngẫu nhiên
+        int[] array = generateRandomArray(n);
+        // In mảng
+        printArray(array);
+        // Nhập x và y
+        System.out.print("Nhập x: ");
+        int x = scanner.nextInt();
+        System.out.print("Nhập y: ");
+        int y = scanner.nextInt();
+        // Liệt kê các số chẵn trong đoạn [x, y]
+        listEvenNumbersInRange(array, x, y);
+    }
+}
