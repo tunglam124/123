@@ -1,0 +1,52 @@
+package test1;
+
+import java.util.Scanner;
+
+public class Main {
+
+    // Hàm lấy chữ số đầu tiên của một số nguyên
+    public static int getFirstDigit(int number) {
+        number = Math.abs(number); // Bỏ dấu âm nếu có
+        while (number >= 10) {
+            number /= 10;
+        }
+        return number;
+    }
+
+    // Hàm liệt kê các số có chữ số đầu tiên là số chẵn
+    public static void listNumbersWithEvenFirstDigit(int[] array) {
+        System.out.print("Các số có chữ số đầu tiên là số chẵn: ");
+        boolean found = false;
+        for (int num : array) {
+            int firstDigit = getFirstDigit(num);
+            if (firstDigit % 2 == 0) {
+                System.out.print(num + " ");
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("Không có số nào.");
+        } else {
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập số lượng phần tử n
+        System.out.print("Nhập số lượng phần tử của mảng: ");
+        int n = scanner.nextInt();
+
+        // Khởi tạo mảng và nhập giá trị cho mảng
+        int[] array = new int[n];
+        System.out.println("Nhập các phần tử của mảng:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Phần tử thứ " + (i + 1) + ": ");
+            array[i] = scanner.nextInt();
+        }
+
+        // Liệt kê các số có chữ số đầu tiên là số chẵn
+        listNumbersWithEvenFirstDigit(array);
+    }
+}
