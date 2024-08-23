@@ -1,0 +1,92 @@
+package test1;
+import java.util.Scanner;
+
+public class Main {
+
+    // Hàm nhập số lượng phần tử n
+    public static int inputArraySize(Scanner scanner) {
+        System.out.print("Nhập số lượng phần tử n: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập mảng
+    public static int[] inputArray(int n, Scanner scanner) {
+        int[] array = new int[n];
+        System.out.println("Nhập các phần tử của mảng:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Phần tử thứ " + (i + 1) + ": ");
+            array[i] = scanner.nextInt();
+        }
+        return array;
+    }
+
+    // Hàm xuất mảng
+    public static void printArray(int[] array) {
+        System.out.print("Mảng: ");
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
+    // Hàm kiểm tra một số có hàng chục bằng 5
+    public static boolean hasTensDigitFive(int number) {
+        number = Math.abs(number); // Bỏ dấu âm nếu có
+        return (number / 10) % 10 == 5;
+    }
+
+    // Hàm tính tổng các số có hàng chục bằng 5 trong mảng
+    public static int sumOfNumbersWithTensDigitFive(int[] array) {
+        int sum = 0;
+        for (int num : array) {
+            if (hasTensDigitFive(num)) {
+                sum += num;
+            }
+        }
+        return sum;
+    }
+
+    // Hàm tính tổng các chữ số của một số
+    public static int sumOfDigits(int number) {
+        number = Math.abs(number); // Bỏ dấu âm nếu có
+        int sum = 0;
+        while (number > 0) {
+            sum += number % 10;
+            number /= 10;
+        }
+        return sum;
+    }
+
+    // Hàm tính tổng các chữ số của các số có hàng chục bằng 5 trong mảng
+    public static int sumOfDigitsOfNumbersWithTensDigitFive(int[] array) {
+        int totalSum = 0;
+        for (int num : array) {
+            if (hasTensDigitFive(num)) {
+                totalSum += sumOfDigits(num);
+            }
+        }
+        return totalSum;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập số lượng phần tử n
+        int n = inputArraySize(scanner);
+
+        // Nhập mảng
+        int[] array = inputArray(n, scanner);
+
+        // Xuất mảng
+        printArray(array);
+
+        // Tính tổng các số có hàng chục bằng 5
+        int sumNumbers = sumOfNumbersWithTensDigitFive(array);
+        System.out.println("Tổng các số có hàng chục là 5 trong mảng: " + sumNumbers);
+
+        // Tính tổng các chữ số của các số có hàng chục bằng 5
+        int sumDigits = sumOfDigitsOfNumbersWithTensDigitFive(array);
+        System.out.println("Tổng các chữ số của các số có hàng chục là 5 trong mảng: " + sumDigits);
+    }
+}
