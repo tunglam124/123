@@ -1,0 +1,68 @@
+package test1;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    // Hàm tạo mảng ngẫu nhiên với n phần tử trong khoảng [-1000, 1000]
+    public static int[] generateRandomArray(int n) {
+        int[] array = new int[n];
+        Random rand = new Random();
+        for (int i = 0; i < n; i++) {
+            array[i] = rand.nextInt(2001) - 1000; // Số ngẫu nhiên trong khoảng [-1000, 1000]
+        }
+        return array;
+    }
+
+    // Hàm xuất mảng
+    public static void printArray(int[] array) {
+        System.out.print("Mảng ngẫu nhiên: ");
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
+    // Hàm tính trung bình cộng các giá trị lớn hơn x trong mảng
+    public static double averageOfValuesGreaterThanX(int[] array, int x) {
+        int sum = 0;
+        int count = 0;
+        for (int num : array) {
+            if (num > x) {
+                sum += num;
+                count++;
+            }
+        }
+        return count == 0 ? 0 : (double) sum / count;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập số lượng phần tử n
+        System.out.print("Nhập số lượng phần tử n: ");
+        int n = scanner.nextInt();
+
+        // Tạo mảng ngẫu nhiên
+        int[] array = generateRandomArray(n);
+
+        // Xuất mảng
+        printArray(array);
+
+        // Nhập giá trị x
+        System.out.print("Nhập giá trị x: ");
+        int x = scanner.nextInt();
+
+        // Tính trung bình cộng các giá trị lớn hơn x trong mảng
+        double average = averageOfValuesGreaterThanX(array, x);
+
+        // In kết quả trung bình cộng
+        if (average == 0) {
+            System.out.println("Không có giá trị nào lớn hơn " + x + " trong mảng.");
+        } else {
+            System.out.println("Trung bình cộng các giá trị lớn hơn " + x + " trong mảng: " + average);
+        }
+    }
+}
