@@ -1,0 +1,75 @@
+package test1;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    // Hàm tạo mảng ngẫu nhiên với n phần tử trong khoảng [-1000, 1000]
+    public static int[] generateRandomArray(int n) {
+        int[] array = new int[n];
+        Random rand = new Random();
+        for (int i = 0; i < n; i++) {
+            array[i] = rand.nextInt(2001) - 1000; // Số ngẫu nhiên trong khoảng [-1000, 1000]
+        }
+        return array;
+    }
+
+    // Hàm xuất mảng
+    public static void printArray(int[] array) {
+        System.out.print("Mảng ngẫu nhiên: ");
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
+    // Hàm kiểm tra số nguyên tố
+    public static boolean isPrime(int number) {
+        if (number <= 1) return false; // Các số nhỏ hơn hoặc bằng 1 không phải là số nguyên tố
+        if (number == 2) return true;  // 2 là số nguyên tố
+        if (number % 2 == 0) return false; // Các số chẵn lớn hơn 2 không phải là số nguyên tố
+
+        for (int i = 3; i <= Math.sqrt(number); i += 2) {
+            if (number % i == 0) return false;
+        }
+        return true;
+    }
+
+    // Hàm tính trung bình cộng các số nguyên tố trong mảng
+    public static double averageOfPrimes(int[] array) {
+        int sum = 0;
+        int count = 0;
+        for (int num : array) {
+            if (isPrime(num)) {
+                sum += num;
+                count++;
+            }
+        }
+        return count == 0 ? 0 : (double) sum / count;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập số lượng phần tử n
+        System.out.print("Nhập số lượng phần tử n: ");
+        int n = scanner.nextInt();
+
+        // Tạo mảng ngẫu nhiên
+        int[] array = generateRandomArray(n);
+
+        // Xuất mảng
+        printArray(array);
+
+        // Tính trung bình cộng các số nguyên tố trong mảng
+        double average = averageOfPrimes(array);
+
+        // In kết quả trung bình cộng
+        if (average == 0) {
+            System.out.println("Không có số nguyên tố nào trong mảng.");
+        } else {
+            System.out.println("Trung bình cộng các số nguyên tố trong mảng: " + average);
+        }
+    }
+}
