@@ -1,0 +1,92 @@
+package test1;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    // Lớp Pair để lưu giá trị và vị trí
+    public static class Pair {
+        int value;
+        int row;
+        int col;
+
+        Pair(int value, int row, int col) {
+            this.value = value;
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    // Hàm nhập số dòng
+    public static int nhapDong(Scanner scanner) {
+        System.out.print("Nhập số dòng của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập số cột
+    public static int nhapCot(Scanner scanner) {
+        System.out.print("Nhập số cột của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm tạo mảng 2 chiều với các phần tử ngẫu nhiên trong đoạn [-50, 50]
+    public static int[][] nhapMang(int dong, int cot) {
+        Random rand = new Random();
+        int[][] mang = new int[dong][cot];
+
+        for (int i = 0; i < dong; i++) {
+            for (int j = 0; j < cot; j++) {
+                mang[i][j] = rand.nextInt(101) - 50; // Sinh số ngẫu nhiên trong khoảng [-50, 50]
+            }
+        }
+        return mang;
+    }
+
+    // Hàm xuất mảng 2 chiều
+    public static void xuatMang(int[][] mang) {
+        for (int[] hang : mang) {
+            for (int phanTu : hang) {
+                System.out.print(phanTu + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Hàm tìm giá trị âm lớn nhất trong ma trận 2 chiều
+    public static Pair timAmLonNhat(int[][] mang) {
+        Pair maxAm = null;
+        for (int i = 0; i < mang.length; i++) {
+            for (int j = 0; j < mang[i].length; j++) {
+                if (mang[i][j] < 0) {
+                    if (maxAm == null || mang[i][j] > maxAm.value) {
+                        maxAm = new Pair(mang[i][j], i, j);
+                    }
+                }
+            }
+        }
+        return maxAm;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int dong = nhapDong(scanner);
+        int cot = nhapCot(scanner);
+        int[][] mang = nhapMang(dong, cot);
+
+        System.out.println("Ma trận ngẫu nhiên là:");
+        xuatMang(mang);
+
+        Pair amLonNhat = timAmLonNhat(mang);
+        if (amLonNhat != null) {
+            System.out.println("Giá trị âm lớn nhất trong ma trận là: " + amLonNhat.value);
+            System.out.println("Vị trí của giá trị âm lớn nhất là: [" + amLonNhat.row + "][" + amLonNhat.col + "]");
+        } else {
+            System.out.println("Không tìm thấy giá trị âm nào trong ma trận.");
+        }
+
+        scanner.close();
+    }
+}
