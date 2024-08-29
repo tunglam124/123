@@ -1,0 +1,62 @@
+package test1;
+import java.util.Scanner;
+
+public class MatrixPositiveChecker {
+
+    // Hàm nhập số nguyên từ bàn phím
+    public static int inputInt(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(prompt);
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập ma trận
+    public static int[][] inputMatrix(int rows, int cols) {
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = new int[rows][cols];
+        System.out.println("Nhập các phần tử của ma trận:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.printf("Nhập phần tử ở vị trí (%d, %d): ", i, j);
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    // Hàm xuất ma trận
+    public static void printMatrix(int[][] matrix) {
+        System.out.println("Ma trận:");
+        for (int[] row : matrix) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Hàm kiểm tra ma trận có toàn số dương
+    public static boolean isAllPositive(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int value : row) {
+                if (value <= 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        int rows = inputInt("Nhập số dòng của ma trận: ");
+        int cols = inputInt("Nhập số cột của ma trận: ");
+        int[][] matrix = inputMatrix(rows, cols);
+        printMatrix(matrix);
+        if (isAllPositive(matrix)) {
+            System.out.println("Ma trận có toàn số dương.");
+        } else {
+            System.out.println("Ma trận không có toàn số dương.");
+        }
+    }
+}
