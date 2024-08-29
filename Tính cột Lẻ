@@ -1,0 +1,73 @@
+package test1;
+import java.util.Random;
+import java.util.Scanner;
+
+public class MatrixOddSum {
+    // Hàm nhập số dòng
+    public static int inputRows() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số dòng: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập số cột
+    public static int inputCols() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số cột: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm tạo ma trận với các phần tử ngẫu nhiên từ -50 đến 50
+    public static int[][] generateRandomMatrix(int rows, int cols) {
+        Random random = new Random();
+        int[][] matrix = new int[rows][cols];
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = random.nextInt(101) - 50; // Sinh số ngẫu nhiên trong khoảng [-50, 50]
+            }
+        }
+        return matrix;
+    }
+
+    // Hàm xuất ma trận
+    public static void printMatrix(int[][] matrix) {
+        System.out.println("Ma trận:");
+        for (int[] row : matrix) {
+            for (int element : row) {
+                System.out.print(element + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Hàm tính tổng các giá trị lẻ trên một cột
+    public static int sumOfOddValuesInColumn(int[][] matrix, int colIndex) {
+        int sum = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            int value = matrix[i][colIndex];
+            if (value % 2 != 0) { // Kiểm tra nếu giá trị là số lẻ
+                sum += value;
+            }
+        }
+        return sum;
+    }
+
+    // Hàm tính tổng các giá trị lẻ trên tất cả các cột
+    public static void printOddSumsForAllColumns(int[][] matrix) {
+        for (int j = 0; j < matrix[0].length; j++) { // Duyệt qua tất cả các cột
+            int sum = sumOfOddValuesInColumn(matrix, j);
+            System.out.println("Tổng các giá trị lẻ trên cột " + j + " là: " + sum);
+        }
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        int rows = inputRows();
+        int cols = inputCols();
+        int[][] matrix = generateRandomMatrix(rows, cols);
+        
+        printMatrix(matrix);
+        printOddSumsForAllColumns(matrix);
+    }
+}
