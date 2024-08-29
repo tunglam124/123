@@ -1,0 +1,90 @@
+package test1;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    // Lớp Pair để lưu số và vị trí của số đó
+    public static class Pair {
+        int value;
+        int row;
+        int col;
+
+        Pair(int value, int row, int col) {
+            this.value = value;
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    // Hàm nhập số dòng
+    public static int nhapDong(Scanner scanner) {
+        System.out.print("Nhập số dòng của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập số cột
+    public static int nhapCot(Scanner scanner) {
+        System.out.print("Nhập số cột của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm tạo mảng 2 chiều với các phần tử ngẫu nhiên trong đoạn [-50, 50]
+    public static int[][] nhapMang(int dong, int cot) {
+        Random rand = new Random();
+        int[][] mang = new int[dong][cot];
+
+        for (int i = 0; i < dong; i++) {
+            for (int j = 0; j < cot; j++) {
+                mang[i][j] = rand.nextInt(101) - 50; // Sinh số ngẫu nhiên trong khoảng [-50, 50]
+            }
+        }
+        return mang;
+    }
+
+    // Hàm xuất mảng 2 chiều
+    public static void xuatMang(int[][] mang) {
+        for (int[] hang : mang) {
+            for (int phanTu : hang) {
+                System.out.print(phanTu + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Hàm tìm số nguyên dương đầu tiên xuất hiện trong ma trận 2 chiều
+    public static Pair timSoDuongDauTien(int[][] mang) {
+        for (int i = 0; i < mang.length; i++) {
+            for (int j = 0; j < mang[i].length; j++) {
+                if (mang[i][j] > 0) {
+                    return new Pair(mang[i][j], i, j);
+                }
+            }
+        }
+        // Nếu không tìm thấy số dương nào, trả về null
+        return null;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int dong = nhapDong(scanner);
+        int cot = nhapCot(scanner);
+        int[][] mang = nhapMang(dong, cot);
+
+        System.out.println("Ma trận ngẫu nhiên là:");
+        xuatMang(mang);
+
+        Pair ketQua = timSoDuongDauTien(mang);
+        if (ketQua != null) {
+            System.out.println("Số dương đầu tiên trong ma trận là: " + ketQua.value);
+            System.out.println("Vị trí của số dương đầu tiên là: [" + ketQua.row + "][" + ketQua.col + "]");
+        } else {
+            System.out.println("Không tìm thấy số dương nào trong ma trận.");
+        }
+
+        scanner.close();
+    }
+}
