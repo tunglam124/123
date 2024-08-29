@@ -1,0 +1,72 @@
+package test1;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    // Hàm nhập số dòng
+    public static int nhapDong(Scanner scanner) {
+        System.out.print("Nhập số dòng của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập số cột
+    public static int nhapCot(Scanner scanner) {
+        System.out.print("Nhập số cột của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm tạo mảng 2 chiều với các phần tử ngẫu nhiên trong đoạn [-50, 50]
+    public static int[][] nhapMang(int dong, int cot) {
+        Random rand = new Random();
+        int[][] mang = new int[dong][cot];
+
+        for (int i = 0; i < dong; i++) {
+            for (int j = 0; j < cot; j++) {
+                mang[i][j] = rand.nextInt(101) - 50; // Sinh số ngẫu nhiên trong khoảng [-50, 50]
+            }
+        }
+        return mang;
+    }
+
+    // Hàm xuất mảng 2 chiều
+    public static void xuatMang(int[][] mang) {
+        for (int[] hang : mang) {
+            for (int phanTu : hang) {
+                System.out.print(phanTu + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Hàm tính tổng các số chẵn trong ma trận 2 chiều
+    public static int tinhTongSoChan(int[][] mang) {
+        int tong = 0;
+        for (int[] hang : mang) {
+            for (int phanTu : hang) {
+                if (phanTu % 2 == 0) {
+                    tong += phanTu;
+                }
+            }
+        }
+        return tong;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int dong = nhapDong(scanner);
+        int cot = nhapCot(scanner);
+        int[][] mang = nhapMang(dong, cot);
+
+        System.out.println("Ma trận ngẫu nhiên là:");
+        xuatMang(mang);
+
+        int tongSoChan = tinhTongSoChan(mang);
+        System.out.println("Tổng các phần tử chẵn trong ma trận là: " + tongSoChan);
+
+        scanner.close();
+    }
+}
