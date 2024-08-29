@@ -1,0 +1,78 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    // Hàm nhập số dòng
+    public static int nhapDong(Scanner scanner) {
+        System.out.print("Nhập số dòng của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập số cột
+    public static int nhapCot(Scanner scanner) {
+        System.out.print("Nhập số cột của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm tạo mảng 2 chiều với các phần tử ngẫu nhiên trong đoạn [-50, 50]
+    public static int[][] nhapMang(int dong, int cot) {
+        Random rand = new Random();
+        int[][] mang = new int[dong][cot];
+
+        for (int i = 0; i < dong; i++) {
+            for (int j = 0; j < cot; j++) {
+                mang[i][j] = rand.nextInt(101) - 50; // Sinh số ngẫu nhiên trong khoảng [-50, 50]
+            }
+        }
+        return mang;
+    }
+
+    // Hàm xuất mảng 2 chiều
+    public static void xuatMang(int[][] mang) {
+        for (int[] hang : mang) {
+            for (int phanTu : hang) {
+                System.out.print(phanTu + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Hàm tìm số chẵn đầu tiên trong ma trận 2 chiều và vị trí của nó
+    public static int[] timSoChanDauTien(int[][] mang) {
+        for (int i = 0; i < mang.length; i++) {
+            for (int j = 0; j < mang[i].length; j++) {
+                if (mang[i][j] % 2 == 0) {
+                    return new int[]{mang[i][j], i, j}; // Trả về số chẵn đầu tiên và vị trí của nó
+                }
+            }
+        }
+        return null; // Nếu không có số chẵn nào
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int dong = nhapDong(scanner);
+        int cot = nhapCot(scanner);
+        int[][] mang = nhapMang(dong, cot);
+
+        System.out.println("Ma trận ngẫu nhiên là:");
+        xuatMang(mang);
+
+        int[] ketQua = timSoChanDauTien(mang);
+
+        if (ketQua != null) {
+            int soChanDauTien = ketQua[0];
+            int viTriDong = ketQua[1];
+            int viTriCot = ketQua[2];
+            System.out.println("Số chẵn đầu tiên trong ma trận là: " + soChanDauTien);
+            System.out.println("Vị trí của số chẵn đầu tiên là: (" + viTriDong + ", " + viTriCot + ")");
+        } else {
+            System.out.println("Không có số chẵn nào trong ma trận.");
+        }
+
+        scanner.close();
+    }
+}
