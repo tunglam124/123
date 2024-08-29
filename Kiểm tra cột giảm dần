@@ -1,0 +1,79 @@
+package test1;
+import java.util.Scanner;
+
+import java.util.Scanner;
+
+public class MatrixCheck {
+
+    // Hàm nhập số dòng
+    public static int inputRows() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số dòng của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập số cột
+    public static int inputCols() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số cột của ma trận: ");
+        return scanner.nextInt();
+    }
+
+    // Hàm nhập ma trận từ bàn phím
+    public static int[][] inputMatrix(int rows, int cols) {
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrix = new int[rows][cols];
+        System.out.println("Nhập các phần tử của ma trận:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print("Nhập phần tử tại (" + i + "," + j + "): ");
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+        return matrix;
+    }
+
+    // Hàm xuất ma trận
+    public static void printMatrix(int[][] matrix) {
+        System.out.println("Ma trận:");
+        for (int[] row : matrix) {
+            for (int elem : row) {
+                System.out.print(elem + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Hàm kiểm tra xem một cột có giảm dần hay không
+    public static boolean isColumnDescending(int[][] matrix, int col) {
+        int rows = matrix.length;
+        for (int i = 1; i < rows; i++) {
+            if (matrix[i][col] >= matrix[i - 1][col]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Hàm main để khởi chạy chương trình
+    public static void main(String[] args) {
+        int rows = inputRows();
+        int cols = inputCols();
+        int[][] matrix = inputMatrix(rows, cols);
+        printMatrix(matrix);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập cột cần kiểm tra (0 đến " + (cols - 1) + "): ");
+        int col = scanner.nextInt();
+
+        if (col < 0 || col >= cols) {
+            System.out.println("Cột không hợp lệ!");
+        } else {
+            if (isColumnDescending(matrix, col)) {
+                System.out.println("Cột " + col + " có giảm dần.");
+            } else {
+                System.out.println("Cột " + col + " không có giảm dần.");
+            }
+        }
+    }
+}
