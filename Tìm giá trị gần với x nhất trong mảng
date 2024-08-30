@@ -1,0 +1,53 @@
+package test1;
+import java.util.Scanner;
+
+public class ClosestValueFinder {
+    public static void main(String[] args) {
+        double[] array = inputArray();
+        double x = inputX();
+        double closestValue = findClosestValue(array, x);
+        outputResult(closestValue, x);
+    }
+
+    // Hàm để nhập mảng từ người dùng
+    public static double[] inputArray() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số lượng phần tử của mảng: ");
+        int n = scanner.nextInt();
+        double[] array = new double[n];
+        System.out.println("Nhập các phần tử của mảng:");
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Phần tử " + (i) + ": ");
+            array[i] = scanner.nextDouble();
+        }
+        return array;
+    }
+
+    // Hàm nhập giá trị x từ bàn phím
+    public static double inputX() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập giá trị x: ");
+        return scanner.nextDouble();
+    }
+
+    // Hàm tìm giá trị gần với x nhất trong mảng
+    public static double findClosestValue(double[] array, double x) {
+        double closestValue = array[0];
+        double minDifference = Math.abs(array[0] - x);
+
+        for (int i = 1; i < array.length; i++) {
+            double difference = Math.abs(array[i] - x);
+            if (difference < minDifference) {
+                minDifference = difference;
+                closestValue = array[i];
+            }
+        }
+        return closestValue;
+    }
+
+    // Hàm xuất kết quả
+    public static void outputResult(double closestValue, double x) {
+        System.out.println("Giá trị trong mảng gần với " + x + " nhất là: " + closestValue);
+    }
+}
