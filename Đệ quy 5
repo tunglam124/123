@@ -1,0 +1,34 @@
+package test1;
+import java.util.Scanner;
+
+public class SumSeries {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập giá trị của n từ bàn phím
+        System.out.print("Nhập giá trị của n: ");
+        int n = scanner.nextInt();
+
+        // Kiểm tra điều kiện n >= 1
+        if (n < 1) {
+            System.out.println("Giá trị của n phải lớn hơn hoặc bằng 1.");
+        } else {
+            // Tính tổng S(n)
+            double result = calculateSeriesSum(n);
+            System.out.println("S(" + n + ") = " + result);
+        }
+
+        scanner.close(); // Đóng Scanner sau khi sử dụng
+    }
+
+    // Hàm đệ quy tính tổng S(n) = 1 + 1/(1+2) + 1/(1+2+3) + ... + 1/(1+2+3+...+n)
+    public static double calculateSeriesSum(int n) {
+        // Điều kiện dừng của đệ quy
+        if (n == 1) {
+            return 1.0; // Tổng khi n = 1 là 1
+        } else {
+            // Tính tổng từ 1 đến n-1 rồi cộng với 1/(1+2+...+n)
+            return calculateSeriesSum(n - 1) + 1.0 / (n * (n + 1) / 2);
+        }
+    }
+}
