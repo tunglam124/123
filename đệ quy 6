@@ -1,0 +1,34 @@
+package test1;
+import java.util.Scanner;
+
+public class DigitCount {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập giá trị của n từ bàn phím
+        System.out.print("Nhập giá trị của n: ");
+        int n = scanner.nextInt();
+
+        // Kiểm tra điều kiện n phải là số nguyên dương
+        if (n <= 0) {
+            System.out.println("Giá trị của n phải là số nguyên dương.");
+        } else {
+            // Đếm số lượng chữ số
+            int digitCount = countDigits(n);
+            System.out.println("Số lượng chữ số của " + n + " là: " + digitCount);
+        }
+
+        scanner.close(); // Đóng Scanner sau khi sử dụng
+    }
+
+    // Hàm đệ quy đếm số lượng chữ số của số nguyên dương n
+    public static int countDigits(int n) {
+        // Điều kiện dừng của đệ quy
+        if (n < 10) {
+            return 1; // Nếu n là một chữ số thì trả về 1
+        } else {
+            // Đệ quy: chia n cho 10 và đếm số chữ số còn lại
+            return 1 + countDigits(n / 10);
+        }
+    }
+}
