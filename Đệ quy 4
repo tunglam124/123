@@ -1,0 +1,36 @@
+package test1;
+import java.util.Scanner;
+
+public class PowerSeriesSum {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập giá trị của x và n từ bàn phím
+        System.out.print("Nhập giá trị của x: ");
+        int x = scanner.nextInt();
+        System.out.print("Nhập giá trị của n: ");
+        int n = scanner.nextInt();
+
+        // Kiểm tra điều kiện n >= 1
+        if (n < 1) {
+            System.out.println("Giá trị của n phải lớn hơn hoặc bằng 1.");
+        } else {
+            // Tính tổng S(x, n)
+            double result = calculatePowerSeriesSum(x, n);
+            System.out.println("S(" + x + ", " + n + ") = " + result);
+        }
+
+        scanner.close(); // Đóng Scanner sau khi sử dụng
+    }
+
+    // Hàm đệ quy tính tổng x^1 + x^2 + ... + x^n
+    public static double calculatePowerSeriesSum(int x, int n) {
+        // Điều kiện dừng của đệ quy
+        if (n == 1) {
+            return x; // Tổng khi n = 1 là x
+        } else {
+            // Đệ quy: tính tổng từ x^1 đến x^(n-1) rồi cộng với x^n
+            return calculatePowerSeriesSum(x, n - 1) + Math.pow(x, n);
+        }
+    }
+}
