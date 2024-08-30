@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class DanhSachNhanVien {
+    private List<NhanVien> danhSach;
+
+    public DanhSachNhanVien() {
+        this.danhSach = new ArrayList<>();
+    }
+
+    // Nhập danh sách nhân viên
+    public void themNhanVien(NhanVien nv) {
+        danhSach.add(nv);
+    }
+
+    // Xuất danh sách nhân viên
+    public void xuatDanhSach() {
+        for (NhanVien nv : danhSach) {
+            System.out.println(nv);
+        }
+    }
+
+    // Tính tổng tiền lương của tất cả nhân viên
+    public double tinhTongTienLuong() {
+        return danhSach.stream().mapToDouble(NhanVien::tinhLuong).sum();
+    }
+
+    // Xuất nhân viên có lương cao nhất
+    public void xuatNhanVienLuongCaoNhat() {
+        Optional<NhanVien> nhanVienLuongCaoNhat = danhSach.stream()
+                .max((nv1, nv2) -> Double.compare(nv1.tinhLuong(), nv2.tinhLuong()));
+        if (nhanVienLuongCaoNhat.isPresent()) {
+            System.out.println("Nhân viên có lương cao nhất: " + nhanVienLuongCaoNhat.get());
+        } else {
+            System.out.println("Danh sách nhân viên trống.");
+        }
+    }
+}
