@@ -1,0 +1,35 @@
+package test1;
+
+import java.util.Scanner;
+
+public class SeriesSum {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Nhập giá trị của n từ bàn phím
+        System.out.print("Nhập giá trị của n: ");
+        int n = scanner.nextInt();
+
+        // Kiểm tra điều kiện n >= 1
+        if (n < 1) {
+            System.out.println("Giá trị của n phải lớn hơn hoặc bằng 1.");
+        } else {
+            // Tính tổng S(n)
+            double result = calculateSeriesSum(n);
+            System.out.println("S(" + n + ") = " + result);
+        }
+
+        scanner.close(); // Đóng Scanner sau khi sử dụng
+    }
+
+    // Hàm đệ quy tính tổng các phân số 1/(i*(i+1))
+    public static double calculateSeriesSum(int n) {
+        // Điều kiện dừng của đệ quy
+        if (n == 1) {
+            return 1.0 / (1 * 2); // Tổng khi n = 1 là 1/(1*2)
+        } else {
+            // Đệ quy: tính tổng từ 1/(1*2) đến 1/(n-1*n) rồi cộng với 1/(n*(n+1))
+            return calculateSeriesSum(n - 1) + 1.0 / (n * (n + 1));
+        }
+    }
+}
