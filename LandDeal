@@ -1,0 +1,35 @@
+public class LandDeal extends RealEstate {
+    private String landType;  // Type of land (A, B, C)
+
+    public LandDeal(String transactionId, String transactionDate, double pricePerUnit, double area, String landType) {
+        super(transactionId, transactionDate, pricePerUnit, area);
+        this.landType = landType;
+    }
+
+    @Override
+    public double calculateTotalPrice() {
+        double totalPrice;
+        if (landType.equalsIgnoreCase("A")) {
+            totalPrice = area * pricePerUnit * 1.5;
+        } else {
+            totalPrice = area * pricePerUnit;
+        }
+        return totalPrice;
+    }
+
+    @Override
+    public void displayTransactionInfo() {
+        super.displayTransactionInfo();
+        System.out.println("Land Type: " + landType);
+        System.out.println("Total Price: " + calculateTotalPrice());
+    }
+
+    // Getters and setters (optional)
+    public String getLandType() {
+        return landType;
+    }
+
+    public void setLandType(String landType) {
+        this.landType = landType;
+    }
+}
