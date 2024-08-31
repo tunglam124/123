@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListDeal {
+    private List<RealEstate> deals;
+
+    public ListDeal() {
+        this.deals = new ArrayList<>();
+    }
+
+    // Method to add a transaction
+    public void addDeal(RealEstate deal) {
+        deals.add(deal);
+    }
+
+    // Method to calculate the total number of deals for each type
+    public int countDealsByType(Class<? extends RealEstate> type) {
+        int count = 0;
+        for (RealEstate deal : deals) {
+            if (type.isInstance(deal)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    // Method to calculate the average price of all land deals
+    public double calculateAverageLandPrice() {
+        double total = 0.0;
+        int count = 0;
+        for (RealEstate deal : deals) {
+            if (deal instanceof LandDeal) {
+                total += deal.calculateTotalPrice();
+                count++;
+            }
+        }
+        return count > 0 ? total / count : 0.0;
+    }
+
+    // Method to display transactions that occurred in September 2013
+    public void displayDealsInSeptember2013() {
+        for (RealEstate deal : deals) {
+            if (deal.getTransactionDate().startsWith("2013-09")) {
+                deal.displayTransactionInfo();
+                System.out.println("----------");
+            }
+        }
+    }
+
+    // Method to display all transactions
+    public void displayAllDeals() {
+        for (RealEstate deal : deals) {
+            deal.displayTransactionInfo();
+            System.out.println("----------");
+        }
+    }
+}
