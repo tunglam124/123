@@ -1,0 +1,105 @@
+import java.util.Scanner;
+
+public class Process {
+    private ListDeal listDeal;
+    private Scanner scanner;
+
+    public Process() {
+        this.listDeal = new ListDeal();
+        this.scanner = new Scanner(System.in);
+    }
+
+    // Method to display the main menu and handle user input
+    public void displayMenu() {
+        int choice;
+        do {
+            System.out.println("----- Real Estate Transaction Management -----");
+            System.out.println("1. Add a Land Deal");
+            System.out.println("2. Add a House Deal");
+            System.out.println("3. Display All Deals");
+            System.out.println("4. Display Deals in September 2013");
+            System.out.println("5. Calculate Average Land Deal Price");
+            System.out.println("6. Count Number of Land Deals");
+            System.out.println("7. Count Number of House Deals");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+
+            switch (choice) {
+                case 1:
+                    addLandDeal();
+                    break;
+                case 2:
+                    addHouseDeal();
+                    break;
+                case 3:
+                    listDeal.displayAllDeals();
+                    break;
+                case 4:
+                    listDeal.displayDealsInSeptember2013();
+                    break;
+                case 5:
+                    System.out.println("Average Land Deal Price: " + listDeal.calculateAverageLandPrice());
+                    break;
+                case 6:
+                    System.out.println("Number of Land Deals: " + listDeal.countDealsByType(LandDeal.class));
+                    break;
+                case 7:
+                    System.out.println("Number of House Deals: " + listDeal.countDealsByType(HouseDeal.class));
+                    break;
+                case 0:
+                    System.out.println("Exiting the program.");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+            System.out.println();
+        } while (choice != 0);
+    }
+
+    // Method to add a new land deal
+    private void addLandDeal() {
+        System.out.print("Enter Transaction ID: ");
+        String transactionId = scanner.nextLine();
+        System.out.print("Enter Transaction Date (YYYY-MM-DD): ");
+        String transactionDate = scanner.nextLine();
+        System.out.print("Enter Price per Unit: ");
+        double pricePerUnit = scanner.nextDouble();
+        System.out.print("Enter Area: ");
+        double area = scanner.nextDouble();
+        scanner.nextLine();  // Consume newline
+        System.out.print("Enter Land Type (A, B, C): ");
+        String landType = scanner.nextLine();
+
+        LandDeal landDeal = new LandDeal(transactionId, transactionDate, pricePerUnit, area, landType);
+        listDeal.addDeal(landDeal);
+        System.out.println("Land Deal added successfully!");
+    }
+
+    // Method to add a new house deal
+    private void addHouseDeal() {
+        System.out.print("Enter Transaction ID: ");
+        String transactionId = scanner.nextLine();
+        System.out.print("Enter Transaction Date (YYYY-MM-DD): ");
+        String transactionDate = scanner.nextLine();
+        System.out.print("Enter Price per Unit: ");
+        double pricePerUnit = scanner.nextDouble();
+        System.out.print("Enter Area: ");
+        double area = scanner.nextDouble();
+        scanner.nextLine();  // Consume newline
+        System.out.print("Enter House Type (high-end, regular): ");
+        String houseType = scanner.nextLine();
+        System.out.print("Enter Address: ");
+        String address = scanner.nextLine();
+
+        HouseDeal houseDeal = new HouseDeal(transactionId, transactionDate, pricePerUnit, area, houseType, address);
+        listDeal.addDeal(houseDeal);
+        System.out.println("House Deal added successfully!");
+    }
+
+    public static void main(String[] args) {
+        Process process = new Process();
+        process.displayMenu();
+    }
+}
