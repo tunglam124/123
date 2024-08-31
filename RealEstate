@@ -1,0 +1,58 @@
+public class RealEstate {
+    protected String transactionId;
+    protected String transactionDate;
+    protected double pricePerUnit;
+    protected double area;
+
+    public RealEstate(String transactionId, String transactionDate, double pricePerUnit, double area) {
+        this.transactionId = transactionId;
+        this.transactionDate = transactionDate;
+        this.pricePerUnit = pricePerUnit;
+        this.area = area;
+    }
+
+    public double calculateTotalPrice() {
+        // This method will be overridden by subclasses
+        return 0.0;
+    }
+
+    public void displayTransactionInfo() {
+        System.out.println("Transaction ID: " + transactionId);
+        System.out.println("Transaction Date: " + transactionDate);
+        System.out.println("Price per Unit: " + pricePerUnit);
+        System.out.println("Area: " + area);
+    }
+    
+    // Getters and setters (optional)
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    public double getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
+    }
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+    }
+}
