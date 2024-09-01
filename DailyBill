@@ -1,0 +1,17 @@
+public class DailyBill extends HotelBill {
+    private int daysRented;
+
+    public DailyBill(String billId, LocalDate billDate, String customerName, String roomId, double unitPrice, int daysRented) {
+        super(billId, billDate, customerName, roomId, unitPrice);
+        this.daysRented = daysRented;
+    }
+
+    public int getDaysRented() {
+        return daysRented;
+    }
+
+    @Override
+    public double calculatePayment() {
+        return daysRented * getUnitPrice();
+    }
+}
