@@ -1,0 +1,110 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class BillManager {
+    private List<Customer> customers = new ArrayList<>();
+
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+    }
+
+    public void printBills() {
+        for (Customer customer : customers) {
+            System.out.println("Customer ID: " + customer.getCustomerId());
+            System.out.println("Name: " + customer.getName());
+            System.out.println("Bill Date: " + customer.getBillDate());
+            System.out.println("Payment: " + customer.calculatePayment());
+            System.out.println("-----------------------------------");
+        }
+    }
+
+    public double calculateTotalQuantity(String customerType) {
+        int totalQuantity = 0;
+        for (Customer customer : customers) {
+            if (customer instanceof VietnameseCustomer && ((VietnameseCustomer) customer).getCustomerType().equals(customerType)) {
+                totalQuantity += ((VietnameseCustomer) customer).getQuantity();
+            }
+        }
+        return totalQuantity;
+    }
+
+    public double calculateAverageForeignPayment() {
+        int count = 0;
+        double totalPayment = 0;
+        for (Customer customer : customers) {
+            if (customer instanceof ForeignCustomer) {
+                totalPayment += customer.calculatePayment();
+                count++;
+            }
+        }
+        return count > 0 ? totalPayment / count : 0;
+    }
+
+    public void printBillsForSeptember2013() {
+        for (Customer customer : customers) {
+            if (customer.getBillDate().getMonthValue() == 9 && customer.getBillDate().getYear() == 2013) {
+                System.out.println("Customer ID: " + customer.getCustomerId());
+                System.out.println("Name: " + customer.getName());
+                System.out.println("Bill Date: " + customer.getBillDate());
+                System.out.println("Payment: " + customer.calculatePayment());
+                System.out.println("-----------------------------------");
+            }
+        }
+    }
+
+    public void inputCustomers() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of customers: ");
+        int numberOfCustomers = Integer.parseInt(scanner.nextLine());
+
+        for (int i = 0; i < numberOfCustomers; i++) {
+            System.out.println("Enter details for customer " + (i + 1));
+            System.out.print("Is this customer Vietnamese or Foreign (v/f)? ");
+            String type = scanner.nextLine();
+
+            System.out.print("Customer ID: ");
+            String customerId = scanner.nextLine();
+
+            System.out.print("Name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Bill Date (yyyy-mm-dd): ");
+            LocalDate billDate = LocalDate.parse(scanner.nextLine());
+
+            if (type.equalsIgnoreCase("v")) {
+                System.out.print("Customer Type (Sinh hoat/Kinh doanh/San xuat): ");
+                String customerType = scanner.nextLine();
+
+                System.out.print("Quantity (KW): ");
+                int quantity = Integer.parseInt(scanner.nextLine());
+
+                System.out.print("Unit Price: ");
+                double unitPrice = Double.parseDouble(scanner.nextLine());
+
+                System.out.print("Quota: ");
+                int quota = Integer.parseInt(scanner.nextLine());
+
+                VietnameseCustomer vietnameseCustomer = new VietnameseCustomer(customerId, name, billDate, customerType, quantity, unitPrice, quota);
+                addCustomer(vietnameseCustomer);
+            } else if (type.equalsIgnoreCase("f")) {
+                System.out.print("Nationality: ");
+                String nationality = scanner.nextLine();
+
+                System.out.print("Quantity (KW): ");
+                int quantity = Integer.parseInt(scanner.nextLine());
+
+                System.out.print("Unit Price: ");
+                double unitPrice = Double.parseDouble(scanner.nextLine());
+
+                ForeignCustomer foreignCustomer = new ForeignCustomer(customerId, name, billDate, nationality, quantity, unitPrice);
+                addCustomer(foreignCustomer);
+            } else {
+                System.out.println("Invalid customer type!");
+            }
+        }
+
+        scanner.close();
+    }
+}
