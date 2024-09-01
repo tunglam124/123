@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListBill {
+    private List<HotelBill> bills;
+
+    // Constructor
+    public ListBill() {
+        this.bills = new ArrayList<>();
+    }
+
+    // Phương thức thêm hóa đơn vào danh sách
+    public void addBill(HotelBill bill) {
+        bills.add(bill);
+    }
+
+    // Phương thức xuất danh sách hóa đơn
+    public void printBills() {
+        for (Bill bill : bills) {
+            System.out.println("Bill ID: " + bill.getBillId());
+            System.out.println("Bill Date: " + bill.getBillDate());
+            System.out.println("Customer Name: " + bill.getCustomerName());
+            System.out.println("Room ID: " + bill.getRoomId());
+            System.out.println("Unit Price: " + bill.getUnitPrice());
+
+            double payment = bill.calculatePayment();
+            if (payment != -1) {
+                System.out.println("Total Payment: " + payment);
+            } else {
+                System.out.println("Invalid hourly bill (over 30 hours).");
+            }
+            System.out.println("----------------------------");
+        }
+    }
+
+    // Phương thức tính tổng tiền của tất cả các hóa đơn
+    public double calculateTotalPayment() {
+        double totalPayment = 0;
+        for (HotelBill bill : bills) {
+            double payment = bill.calculatePayment();
+            if (payment != -1) {
+                totalPayment += payment;
+            }
+        }
+        return totalPayment;
+    }
+
+    // Phương thức lọc hóa đơn theo tháng và năm
+    public void printBillsForMonth(int month, int year) {
+        for (HotelBill bill : bills) {
+            if (bill.getBillDate().getMonthValue() == month && bill.getBillDate().getYear() == year) {
+                System.out.println("Bill ID: " + bill.getBillId());
+                System.out.println("Bill Date: " + bill.getBillDate());
+                System.out.println("Customer Name: " + bill.getCustomerName());
+                System.out.println("Room ID: " + bill.getRoomId());
+                System.out.println("Unit Price: " + bill.getUnitPrice());
+
+                double payment = bill.calculatePayment();
+                if (payment != -1) {
+                    System.out.println("Total Payment: " + payment);
+                } else {
+                    System.out.println("Invalid hourly bill (over 30 hours).");
+                }
+                System.out.println("----------------------------");
+            }
+        }
+    }
+}
