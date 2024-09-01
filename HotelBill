@@ -1,0 +1,41 @@
+import java.time.LocalDate;
+
+public abstract class HotelBill {
+    private String billId;
+    private LocalDate billDate;
+    private String customerName;
+    private String roomId;
+    private double unitPrice;
+
+    public Bill(String billId, LocalDate billDate, String customerName, String roomId, double unitPrice) {
+        this.billId = billId;
+        this.billDate = billDate;
+        this.customerName = customerName;
+        this.roomId = roomId;
+        this.unitPrice = unitPrice;
+    }
+
+    // Getter methods
+    public String getBillId() {
+        return billId;
+    }
+
+    public LocalDate getBillDate() {
+        return billDate;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    // Abstract method to calculate payment, implemented by subclasses
+    public abstract double calculatePayment();
+}
