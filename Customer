@@ -1,0 +1,29 @@
+import java.time.LocalDate;
+
+public class Customer {
+    protected String customerId;
+    protected String name;
+    protected LocalDate billDate;
+
+    public Customer(String customerId, String name, LocalDate billDate) {
+        this.customerId = customerId;
+        this.name = name;
+        this.billDate = billDate;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getBillDate() {
+        return billDate;
+    }
+
+    public double calculatePayment() {
+        return 0;
+    }
+}
