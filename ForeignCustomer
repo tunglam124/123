@@ -1,0 +1,19 @@
+public class ForeignCustomer extends Customer {
+    private String nationality;
+    private int quantity;
+    private double unitPrice;
+
+    public ForeignCustomer(String customerId, String name, LocalDate billDate, String nationality, int quantity, double unitPrice) {
+        super(customerId, name, billDate);
+        this.nationality = nationality;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+    }
+
+    @Override
+    public double calculatePayment() {
+        return quantity * unitPrice;
+    }
+
+    // Getters and Setters
+}
