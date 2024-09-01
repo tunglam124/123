@@ -1,0 +1,23 @@
+public class HourlyBill extends HotelBill {
+    private int hoursRented;
+
+    public HourlyBill(String billId, LocalDate billDate, String customerName, String roomId, double unitPrice, int hoursRented) {
+        super(billId, billDate, customerName, roomId, unitPrice);
+        this.hoursRented = hoursRented;
+    }
+
+    public int getHoursRented() {
+        return hoursRented;
+    }
+
+    @Override
+    public double calculatePayment() {
+        if (hoursRented <= 24) {
+            return hoursRented * getUnitPrice();
+        } else if (hoursRented > 24 && hoursRented <= 30) {
+            return 24 * getUnitPrice(); // Only charge for 24 hours
+        } else {
+            return -1; // Indicate that hourly billing is not applicable
+        }
+    }
+}
