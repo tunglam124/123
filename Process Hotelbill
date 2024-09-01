@@ -1,0 +1,111 @@
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class Process {
+    private ListBill listBill;
+    private Scanner scanner;
+
+    // Constructor
+    public Process() {
+        this.listBill = new ListBill();
+        this.scanner = new Scanner(System.in);
+    }
+
+    // Phương thức hiển thị menu và xử lý lựa chọn của người dùng
+    public void displayMenu() {
+        int choice;
+        do {
+            System.out.println("====== MENU ======");
+            System.out.println("1. Thêm hóa đơn theo giờ");
+            System.out.println("2. Thêm hóa đơn theo ngày");
+            System.out.println("3. Xuất danh sách hóa đơn");
+            System.out.println("4. Tính tổng tiền tất cả hóa đơn");
+            System.out.println("5. Lọc hóa đơn theo tháng và năm");
+            System.out.println("0. Thoát");
+            System.out.print("Chọn chức năng: ");
+            choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 1:
+                    addHourlyBill();
+                    break;
+                case 2:
+                    addDailyBill();
+                    break;
+                case 3:
+                    listBill.printBills();
+                    break;
+                case 4:
+                    System.out.println("Total Payment: " + listBill.calculateTotalPayment());
+                    break;
+                case 5:
+                    filterBillsByMonthAndYear();
+                    break;
+                case 0:
+                    System.out.println("Thoát chương trình.");
+                    break;
+                default:
+                    System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
+            }
+        } while (choice != 0);
+    }
+
+    // Phương thức thêm hóa đơn theo giờ
+    private void addHourlyBill() {
+        System.out.print("Mã hóa đơn: ");
+        String billId = scanner.nextLine();
+
+        System.out.print("Ngày hóa đơn (yyyy-mm-dd): ");
+        LocalDate billDate = LocalDate.parse(scanner.nextLine());
+
+        System.out.print("Tên khách hàng: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Mã phòng: ");
+        String roomId = scanner.nextLine();
+
+        System.out.print("Đơn giá: ");
+        double unitPrice = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Số giờ thuê: ");
+        int hoursRented = Integer.parseInt(scanner.nextLine());
+
+        HourlyBill hourlyBill = new HourlyBill(billId, billDate, customerName, roomId, unitPrice, hoursRented);
+        listBill.addBill(hourlyBill);
+    }
+
+    // Phương thức thêm hóa đơn theo ngày
+    private void addDailyBill() {
+        System.out.print("Mã hóa đơn: ");
+        String billId = scanner.nextLine();
+
+        System.out.print("Ngày hóa đơn (yyyy-mm-dd): ");
+        LocalDate billDate = LocalDate.parse(scanner.nextLine());
+
+        System.out.print("Tên khách hàng: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Mã phòng: ");
+        String roomId = scanner.nextLine();
+
+        System.out.print("Đơn giá: ");
+        double unitPrice = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Số ngày thuê: ");
+        int daysRented = Integer.parseInt(scanner.nextLine());
+
+        DailyBill dailyBill = new DailyBill(billId, billDate, customerName, roomId, unitPrice, daysRented);
+        listBill.addBill(dailyBill);
+    }
+
+    // Phương thức lọc hóa đơn theo tháng và năm
+    private void filterBillsByMonthAndYear() {
+        System.out.print("Nhập tháng: ");
+        int month = Integer.parseInt(scanner.nextLine());
+
+        System.out.print("Nhập năm: ");
+        int year = Integer.parseInt(scanner.nextLine());
+
+        listBill.printBillsForMonth(month, year);
+    }
+}
