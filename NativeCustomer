@@ -1,0 +1,26 @@
+public class NativeCustomer extends Customer {
+    private String customerType; // sinh hoạt, kinh doanh, sản xuất
+    private int quantity;
+    private double unitPrice;
+    private int quota;
+
+    public NativeCustomer(String customerId, String name, LocalDate billDate, String customerType, int quantity, double unitPrice, int quota) {
+        super(customerId, name, billDate);
+        this.customerType = customerType;
+        this.quantity = quantity;
+        this.unitPrice = unitPrice;
+        this.quota = quota;
+    }
+
+    @Override
+    public double calculatePayment() {
+        if (quantity <= quota) {
+            return quantity * unitPrice;
+        } else {
+            int excess = quantity - quota;
+            return quota * unitPrice + excess * unitPrice * 2.5;
+        }
+    }
+
+    // Getters and Setters
+}
