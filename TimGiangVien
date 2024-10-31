@@ -1,0 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class GiaoVien extends Nguoi {
+    // Tìm giáo viên có thâm niên > 5 năm và có chuyên môn thuộc khối tự nhiên
+    public static List<GiaoVien> timGiaoVienTheoThamNienVaChuyenMon(List<GiaoVien> giaoViens) {
+        List<GiaoVien> ketQua = new ArrayList<>();
+        for (GiaoVien giaoVien : giaoViens) {
+            if (giaoVien.tinhThamNien() > 5 && giaoVien.getChuyenMon().equalsIgnoreCase("Tự nhiên")) {
+                ketQua.add(giaoVien);
+            }
+        }
+        return ketQua;
+    }
+}
