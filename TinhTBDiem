@@ -1,0 +1,22 @@
+class HocSinh extends Nguoi {
+    // Tính điểm trung bình
+    public float tinhDiemTrungBinh() {
+        return (DiemToan + DiemVan + DiemNN) / 3;
+    }
+
+    // Xếp loại học sinh
+    public String xepLoai() {
+        float diemTB = tinhDiemTrungBinh();
+        if (diemTB < 5) {
+            return "Yếu";
+        } else if (diemTB < 7) {
+            return "Trung bình";
+        } else if (diemTB < 8) {
+            return "Khá";
+        } else if (diemTB < 9) {
+            return "Giỏi";
+        } else {
+            return "Xuất sắc";
+        }
+    }
+}
