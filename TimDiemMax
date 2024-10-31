@@ -1,0 +1,34 @@
+import java.util.List;
+
+class HocSinh extends Nguoi {
+    // Tìm điểm trung bình cao nhất
+    public static float timDiemTrungBinhCaoNhat(List<HocSinh> hocSinhs) {
+        if (hocSinhs == null || hocSinhs.isEmpty()) {
+            return 0;
+        }
+
+        float diemCaoNhat = hocSinhs.get(0).tinhDiemTrungBinh(); 
+        for (int i = 1; i < hocSinhs.size(); i++) {
+            float diemTB = hocSinhs.get(i).tinhDiemTrungBinh();
+            if (diemTB > diemCaoNhat) {
+                diemCaoNhat = diemTB;
+            }
+        }
+        return diemCaoNhat;
+    }
+
+    // Tìm học sinh có điểm trung bình cao nhất
+    public static HocSinh timHocSinhDiemCaoNhat(List<HocSinh> hocSinhs) {
+        if (hocSinhs == null || hocSinhs.isEmpty()) {
+            return null;
+        }
+
+        float diemCaoNhat = timDiemTrungBinhCaoNhat(hocSinhs);
+        for (HocSinh hocSinh : hocSinhs) {
+            if (hocSinh.tinhDiemTrungBinh() == diemCaoNhat) {
+                return hocSinh;
+            }
+        }
+        return null;
+    }
+}
