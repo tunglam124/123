@@ -1,0 +1,56 @@
+class Nguoi {
+    // Constructor mặc định (không tham số)
+    public Nguoi() {
+        this.HoTen = "";
+        this.NamSinh = 0;
+        this.NoiSinh = "";
+        this.DiaChi = "";
+    }
+
+    // Constructor có tham số
+    public Nguoi(String hoTen, int namSinh, String noiSinh, String diaChi) {
+        this.HoTen = hoTen;
+        this.NamSinh = namSinh;
+        this.NoiSinh = noiSinh;
+        this.DiaChi = diaChi;
+    }
+
+}
+
+class GiaoVien extends Nguoi {
+  
+    // Constructor mặc định
+    public GiaoVien() {
+        super(); // Gọi constructor mặc định của lớp cha (Nguoi)
+        this.NamBatDauDay = 0;
+        this.ChuyenMon = "";
+    }
+
+    // Constructor có tham số
+    public GiaoVien(String hoTen, int namSinh, String noiSinh, String diaChi, int namBatDauDay, String chuyenMon) {
+        super(hoTen, namSinh, noiSinh, diaChi); // Gọi constructor có tham số của lớp cha
+        this.NamBatDauDay = namBatDauDay;
+        this.ChuyenMon = chuyenMon;
+    }
+
+}
+
+class HocSinh extends Nguoi {
+
+    // Constructor mặc định
+    public HocSinh() {
+        super(); 
+        this.DiemToan = 0;
+        this.DiemVan = 0;
+        this.DiemNN = 0;
+    }
+
+    // Constructor có tham số
+    public HocSinh(String hoTen, int namSinh, String noiSinh, String diaChi, float diemToan, float diemVan, float diemNN) {
+        super(hoTen, namSinh, noiSinh, diaChi); 
+        this.DiemToan = diemToan;
+        this.DiemVan = diemVan;
+        this.DiemNN = diemNN;
+    }
+
+}
