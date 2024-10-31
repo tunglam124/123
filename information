@@ -1,0 +1,89 @@
+class Nguoi {
+
+    // Getters
+    public String getHoTen() {
+        return HoTen;
+    }
+
+    public int getNamSinh() {
+        return NamSinh;
+    }
+
+    public String getNoiSinh() {
+        return NoiSinh;
+    }
+
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    // Setters
+    public void setHoTen(String hoTen) {
+        HoTen = hoTen;
+    }
+
+    public void setNamSinh(int namSinh) {
+        NamSinh = namSinh;
+    }
+
+    public void setNoiSinh(String noiSinh) {
+        NoiSinh = noiSinh;
+    }
+
+    public void setDiaChi(String diaChi) {
+        DiaChi = diaChi;
+    }
+
+}
+
+class GiaoVien extends Nguoi {
+
+    // Getters
+    public int getNamBatDauDay() {
+        return NamBatDauDay;
+    }
+
+    public String getChuyenMon() {
+        return ChuyenMon;
+    }
+
+    // Setters
+    public void setNamBatDauDay(int namBatDauDay) {
+        NamBatDauDay = namBatDauDay;
+    }
+
+    public void setChuyenMon(String chuyenMon) {
+        ChuyenMon = chuyenMon;
+    }
+
+}
+
+class HocSinh extends Nguoi {
+
+    // Getters
+    public float getDiemToan() {
+        return DiemToan;
+    }
+
+    public float getDiemVan() {
+        return DiemVan;
+    }
+
+    public float getDiemNN() {
+        return DiemNN;
+    }
+
+    // Setters
+    public void setDiemToan(float diemToan) {
+        DiemToan = diemToan;
+    }
+
+    public void setDiemVan(float diemVan) {
+        DiemVan = diemVan;
+    }
+
+    public void setDiemNN(float diemNN) {
+        DiemNN = diemNN;
+    }
+
+}
