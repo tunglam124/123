@@ -1,0 +1,36 @@
+import java.util.List;
+
+class HocSinh extends Nguoi {
+    // Sắp xếp học sinh theo điểm trung bình giảm dần (QuickSort)
+    public static void sapXepTheoDiemGiamDan(List<HocSinh> hocSinhs) {
+        quickSort(hocSinhs, 0, hocSinhs.size() - 1);
+    }
+
+    private static void quickSort(List<HocSinh> hocSinhs, int low, int high) {
+        if (low < high) {
+            int pi = partition(hocSinhs, low, high);
+
+            quickSort(hocSinhs, low, pi - 1);
+            quickSort(hocSinhs, pi + 1, high);
+        }
+    }
+
+    private static int partition(List<HocSinh> hocSinhs, int low, int high) {
+        HocSinh pivot = hocSinhs.get(high);
+        int i = (low - 1); 
+        for (int j = low; j < high; j++) {
+            if (hocSinhs.get(j).tinhDiemTrungBinh() >= pivot.tinhDiemTrungBinh()) { // Sắp xếp giảm dần
+                i++;
+                swap(hocSinhs, i, j);
+            }
+        }
+        swap(hocSinhs, i + 1, high);
+        return i + 1;
+    }
+
+    private static void swap(List<HocSinh> hocSinhs, int i, int j) {
+        HocSinh temp = hocSinhs.get(i);
+        hocSinhs.set(i, hocSinhs.get(j));
+        hocSinhs.set(j, temp);
+    }
+}
