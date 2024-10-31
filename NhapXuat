@@ -1,0 +1,88 @@
+import java.util.Scanner;
+
+class Nguoi {
+
+    // Nhập thông tin
+    public void nhapThongTin() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nhập họ tên: ");
+        HoTen = scanner.nextLine();
+
+        System.out.print("Nhập năm sinh: ");
+        NamSinh = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Nhập nơi sinh: ");
+        NoiSinh = scanner.nextLine();
+
+        System.out.print("Nhập địa chỉ: ");
+        DiaChi = scanner.nextLine();
+    }
+
+    // Xuất thông tin
+    public void xuatThongTin() {
+        System.out.println("Họ tên: " + HoTen);
+        System.out.println("Năm sinh: " + NamSinh);
+        System.out.println("Nơi sinh: " + NoiSinh);
+        System.out.println("Địa chỉ: " + DiaChi);
+    }
+}
+
+class GiaoVien extends Nguoi {
+
+    // Nhập thông tin
+    @Override
+    public void nhapThongTin() {
+        super.nhapThongTin();
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nhập năm bắt đầu dạy: ");
+        NamBatDauDay = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Nhập chuyên môn (Tự nhiên/Xã hội): ");
+        ChuyenMon = scanner.nextLine();
+    }
+
+    // Xuất thông tin 
+    @Override
+    public void xuatThongTin() {
+        super.xuatThongTin();
+
+        System.out.println("Năm bắt đầu dạy: " + NamBatDauDay);
+        System.out.println("Chuyên môn: " + ChuyenMon);
+    }
+}
+
+class HocSinh extends Nguoi {
+
+    // Nhập thông tin
+    @Override
+    public void nhapThongTin() {
+        super.nhapThongTin();
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nhập điểm Toán: ");
+        DiemToan = scanner.nextFloat();
+
+        System.out.print("Nhập điểm Văn: ");
+        DiemVan = scanner.nextFloat();
+
+        System.out.print("Nhập điểm Ngoại ngữ: ");
+        DiemNN = scanner.nextFloat();
+        scanner.nextLine();
+    }
+
+    // Xuất thông tin 
+    @Override
+    public void xuatThongTin() {
+        super.xuatThongTin(); 
+
+        System.out.println("Điểm Toán: " + DiemToan);
+        System.out.println("Điểm Văn: " + DiemVan);
+        System.out.println("Điểm Ngoại ngữ: " + DiemNN);
+    }
+}
