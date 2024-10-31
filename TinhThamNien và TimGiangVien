@@ -1,0 +1,28 @@
+import java.util.Calendar;
+import java.util.List;
+
+class GiaoVien extends Nguoi {
+  
+    // Tính thâm niên
+    public int tinhThamNien() {
+        int namHienTai = Calendar.getInstance().get(Calendar.YEAR);
+        return namHienTai - NamBatDauDay;
+    }
+
+    // Tìm giáo viên có thâm niên cao nhất
+    public static GiaoVien timGiaoVienThamNienCaoNhat(List<GiaoVien> giaoViens) {
+        if (giaoViens == null || giaoViens.isEmpty()) {
+            return null;
+        }
+
+        GiaoVien giaoVienThamNienCaoNhat = giaoViens.get(0);
+        for (int i = 1; i < giaoViens.size(); i++) {
+            GiaoVien giaoVienHienTai = giaoViens.get(i);
+            if (giaoVienHienTai.tinhThamNien() > giaoVienThamNienCaoNhat.tinhThamNien()) {
+                giaoVienThamNienCaoNhat = giaoVienHienTai;
+            }
+        }
+        return giaoVienThamNienCaoNhat;
+    }
+
+}
