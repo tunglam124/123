@@ -1,0 +1,186 @@
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+class Nguoi {
+
+    // Constructor không tham số
+    public Nguoi() {
+        this.HoTen = "";
+        this.NamSinh = 0;
+        this.NoiSinh = "";
+        this.DiaChi = "";
+    }
+
+    // Constructor có tham số
+    public Nguoi(String hoTen, int namSinh, String noiSinh, String diaChi) {
+        this.HoTen = hoTen;
+        this.NamSinh = namSinh;
+        this.NoiSinh = noiSinh;
+        this.DiaChi = diaChi;
+    }
+
+    // Getters và Setters
+    public String getHoTen() {
+        return HoTen;
+    }
+
+    public void setHoTen(String hoTen) {
+        HoTen = hoTen;
+    }
+
+    // Nhập thông tin
+    public void nhapThongTin() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập họ tên: ");
+        HoTen = scanner.nextLine();
+        System.out.print("Nhập năm sinh: ");
+        NamSinh = scanner.nextInt();
+        scanner.nextLine(); // Đọc bỏ dòng mới còn lại
+        System.out.print("Nhập nơi sinh: ");
+        NoiSinh = scanner.nextLine();
+        System.out.print("Nhập địa chỉ: ");
+        DiaChi = scanner.nextLine();
+    }
+
+    // Xuất thông tin
+    public void xuatThongTin() {
+        System.out.println("Họ tên: " + HoTen);
+        System.out.println("Năm sinh: " + NamSinh);
+        System.out.println("Nơi sinh: " + NoiSinh);
+        System.out.println("Địa chỉ: " + DiaChi);
+    }
+}
+
+class GiaoVien extends Nguoi {
+
+    // Constructor không tham số
+    public GiaoVien() {
+        super(); // Gọi constructor của lớp cha
+        this.NamBatDauDay = 0;
+        this.ChuyenMon = "";
+    }
+
+    // Constructor có tham số
+    public GiaoVien(String hoTen, int namSinh, String noiSinh, String diaChi, int namBatDauDay, String chuyenMon) {
+        super(hoTen, namSinh, noiSinh, diaChi);
+        this.NamBatDauDay = namBatDauDay;
+        this.ChuyenMon = chuyenMon;
+    }
+
+    // Tính thâm niên
+    public int tinhThamNien() {
+        int namHienTai = Calendar.getInstance().get(Calendar.YEAR);
+        return namHienTai - NamBatDauDay;
+    }
+
+    // Tìm giáo viên có thâm niên cao nhất (giả sử danh sách giáo viên có sẵn)
+    public static GiaoVien timGiaoVienThamNienCaoNhat(List<GiaoVien> giaoViens) {
+        GiaoVien giaoVienThamNienCaoNhat = null;
+        int thamNienCaoNhat = 0;
+        for (GiaoVien giaoVien : giaoViens) {
+            int thamNien = giaoVien.tinhThamNien();
+            if (thamNien > thamNienCaoNhat) {
+                thamNienCaoNhat = thamNien;
+                giaoVienThamNienCaoNhat = giaoVien;
+            }
+        }
+        return giaoVienThamNienCaoNhat;
+    }
+
+    // Tìm giáo viên có thâm niên > 5 năm và chuyên môn tự nhiên
+    public static List<GiaoVien> timGiaoVienTheoThamNienVaChuyenMon(List<GiaoVien> giaoViens) {
+        List<GiaoVien> ketQua = new ArrayList<>();
+        for (GiaoVien giaoVien : giaoViens) {
+            if (giaoVien.tinhThamNien() > 5 && giaoVien.getChuyenMon().equalsIgnoreCase("tự nhiên")) {
+                ketQua.add(giaoVien);
+            }
+        }
+        return ketQua;
+    }
+
+}
+
+class HocSinh extends Nguoi {
+
+    // Constructor không tham số
+    public HocSinh() {
+        super();
+        this.DiemToan = 0;
+        this.DiemVan = 0;
+        this.DiemNN = 0;
+    }
+
+    // Constructor có tham số
+    public HocSinh(String hoTen, int namSinh, String noiSinh, String diaChi, float diemToan, float diemVan, float diemNN) {
+        super(hoTen, namSinh, noiSinh, diaChi);
+        this.DiemToan = diemToan;
+        this.DiemVan = diemVan;
+        this.DiemNN = diemNN;
+    }
+
+    // Tính điểm trung bình
+    public float tinhDiemTrungBinh() {
+        return (DiemToan + DiemVan + DiemNN) / 3;
+    }
+
+    // Tìm điểm trung bình cao nhất (giả sử danh sách học sinh có sẵn)
+    public static float timDiemTrungBinhCaoNhat(List<HocSinh> hocSinhs) {
+        float diemCaoNhat = 0;
+        for (HocSinh hocSinh : hocSinhs) {
+            float diemTB = hocSinh.tinhDiemTrungBinh();
+            if (diemTB > diemCaoNhat) {
+                diemCaoNhat = diemTB;
+            }
+        }
+        return diemCaoNhat;
+    }
+
+    // Tìm học sinh có điểm trung bình cao nhất
+    public static HocSinh timHocSinhDiemCaoNhat(List<HocSinh> hocSinhs) {
+        float diemCaoNhat = timDiemTrungBinhCaoNhat(hocSinhs);
+        for (HocSinh hocSinh : hocSinhs) {
+            if (hocSinh.tinhDiemTrungBinh() == diemCaoNhat) {
+                return hocSinh;
+            }
+        }
+        return null;
+    }
+
+    // Xếp loại học sinh
+    public String xepLoai() {
+        float diemTB = tinhDiemTrungBinh();
+        if (diemTB < 5) {
+            return "Yếu";
+        } else if (diemTB < 7) {
+            return "Trung bình";
+        } else if (diemTB < 8) {
+            return "Khá";
+        } else if (diemTB < 9) {
+            return "Giỏi";
+        } else {
+            return "Xuất sắc";
+        }
+    }
+
+    // Sắp xếp học sinh theo điểm trung bình giảm dần (QuickSort)
+    public static void sapXepTheoDiemGiamDan(List<HocSinh> hocSinhs) {
+        Collections.sort(hocSinhs, Comparator.comparing(HocSinh::tinhDiemTrungBinh).reversed());
+    }
+
+    // Sắp xếp học sinh theo tên ABC (Bubble Sort)
+    public static void sapXepTheoTenABC(List<HocSinh> hocSinhs) {
+        int n = hocSinhs.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (hocSinhs.get(j).getHoTen().compareToIgnoreCase(hocSinhs.get(j + 1).getHoTen()) > 0) {
+                    Collections.swap(hocSinhs, j, j + 1);
+                }
+            }
+        }
+    }
+
+}
