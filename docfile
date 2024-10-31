@@ -1,0 +1,82 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class QuanLyTruongHoc {
+
+    public static void main(String[] args) {
+        // Tạo danh sách giáo viên và học sinh mẫu
+        List<GiaoVien> giaoViens = new ArrayList<>();
+        giaoViens.add(new GiaoVien("Nguyễn Văn A", 1980, "Hà Nội", "123 Nguyễn Trãi", 2010, "Tự nhiên"));
+        giaoViens.add(new GiaoVien("Trần Thị B", 1985, "Hồ Chí Minh", "456 Lê Lợi", 2015, "Xã hội"));
+
+        List<HocSinh> hocSinhs = new ArrayList<>();
+        hocSinhs.add(new HocSinh("Lê Văn C", 2005, "Đà Nẵng", "789 Hoàng Diệu", 8.5f, 7.0f, 9.0f));
+        hocSinhs.add(new HocSinh("Phạm Thị D", 2006, "Cần Thơ", "321 Trần Hưng Đạo", 6.0f, 8.0f, 7.5f));
+
+        // Ghi dữ liệu vào file
+        ghiDuLieuGiaoVien("giaovien.txt", giaoViens);
+        ghiDuLieuHocSinh("hocsinh.txt", hocSinhs);
+
+        // Đọc dữ liệu từ file
+        List<GiaoVien> giaoViensDocTuFile = docDuLieuGiaoVien("giaovien.txt");
+        List<HocSinh> hocSinhsDocTuFile = docDuLieuHocSinh("hocsinh.txt");
+
+        // In thông tin giáo viên và học sinh đọc từ file
+        System.out.println("Danh sách giáo viên:");
+        for (GiaoVien giaoVien : giaoViensDocTuFile) {
+            giaoVien.xuatThongTin();
+            System.out.println("Thâm niên: " + giaoVien.tinhThamNien());
+            System.out.println();
+        }
+
+        System.out.println("Danh sách học sinh:");
+        for (HocSinh hocSinh : hocSinhsDocTuFile) {
+            hocSinh.xuatThongTin();
+            System.out.println("Điểm trung bình: " + hocSinh.tinhDiemTrungBinh());
+            System.out.println("Xếp loại: " + hocSinh.xepLoai());
+            System.out.println();
+        }
+    }
+
+    public static List<GiaoVien> docDuLieuGiaoVien(String tenFile) {
+        List<GiaoVien> giaoViens = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(tenFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                GiaoVien giaoVien = new GiaoVien(
+                        parts[0], Integer.parseInt(parts[1]), parts[2], parts[3],
+                        Integer.parseInt(parts[4]), parts[5]
+                );
+                giaoViens.add(giaoVien);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return giaoViens;
+    }
+
+    public static List<HocSinh> docDuLieuHocSinh(String tenFile) {
+        List<HocSinh> hocSinhs = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(tenFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                HocSinh hocSinh = new HocSinh(
+                        parts[0], Integer.parseInt(parts[1]), parts[2], parts[3],
+                        Float.parseFloat(parts[4]), Float.parseFloat(parts[5]), Float.parseFloat(parts[6])
+                );
+                hocSinhs.add(hocSinh);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return hocSinhs;
+    }
+
+}
